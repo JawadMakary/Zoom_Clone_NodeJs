@@ -16,6 +16,11 @@ const {v4:uuidv4}=require('uuid')
 
 // to define the view engine
 app.set('view engine','ejs')
+
+//tell the server where is our public folder
+app.use(express.static('public'))
+
+
 app.get('/',(req,res)=>{
 //    redirect to uuidv4 fct->generate unique id automatically
 res.redirect(`/${uuidv4()}`)
@@ -35,4 +40,4 @@ app.get('/:room',(req,res)=>{
 // to run nodeJs server:npm i -g nodemon
 // then -> nodemon server.js(in the terminal)
 // localhost:3030 
-server.listen(3030);
+server.listen(3040);

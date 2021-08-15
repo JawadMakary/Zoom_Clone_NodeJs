@@ -2,6 +2,7 @@
 help us to pass vars in html
 npm i ejs
 -->
+<!-- defer->loaded last -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,9 +11,17 @@ npm i ejs
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Zoom Clone</title>
     <link rel="stylesheet" href="style.css">
-    <script>console.log(" this is the roomId -> <%= roomId %>")
+    <!-- peerJs -->
+    <script defer src="https://unpkg.com/peerjs@1.3.1/dist/peerjs.min.js"></script>
+    <script>
+        // to be passed when joining(inside script js while emiting)
+    const ROOM_ID="<%= roomId %>"
+    console.log(" this is the roomId -><%= roomId %> ")
     </script>  
     <script src='script.js' defer></script>
+    <!-- import socket.io -->
+    <script src="/socket.io/socket.io.js" ></script>
+
 
 </head>
 <body>

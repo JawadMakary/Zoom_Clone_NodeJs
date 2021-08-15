@@ -1,0 +1,1 @@
+// npm init -> to initialize nodeJs app

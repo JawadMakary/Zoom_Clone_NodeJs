@@ -28,7 +28,14 @@ io.on('connection',(Socket)=>{
         Socket.join(roomId)
         // broadcast the user connected! (tell everyone that the user is connected )
         Socket.broadcast.to(roomId).emit('user-connected',userId);
+        // listen and receive msg
+        Socket.on('message',(message)=>{
+            //send to the frontEnd(same room)
+            io.to(roomId).emit('createMessage',message)
+        })
 
+
+        
     })
 })
 // what route will be

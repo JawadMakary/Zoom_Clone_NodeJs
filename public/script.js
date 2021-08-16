@@ -33,13 +33,35 @@ navigator.mediaDevices.getUserMedia({
   Socket.on('user-connected', userId => {
     connectToNewUser(userId, stream)
   })
-})
-// automatically generate id
-myPeer.on('open',id=>{
-  // console.log(id)
-  // pass id from myPeer-open
-  Socket.emit('join-room',ROOM_ID,id)
-})
+      // input value
+    let text = $("input");
+    // when press enter send message
+    // the enter btn have the nb of 13 in the keyboard
+    $('html').keydown(function (e) {
+      if (e.which == 13 && text.val().length !== 0) {
+        // socket.emit->send 
+        //sending a msg from frontend
+        Socket.emit('message', text.val());
+        // console.log(text.val())
+
+        text.val('')
+      }
+    });
+
+  Socket.on("createMessage",(message)=>{
+    // console.log(message)
+    // append the messages to the unordered list
+    $('ul').append(`<li class='message'>
+    <b>user</b><br> ${message}
+    </li>`)
+  })
+  })
+  // automatically generate id
+  myPeer.on('open',id=>{
+    // console.log(id)
+    // pass id from myPeer-open
+    Socket.emit('join-room',ROOM_ID,id)
+  })
 
 // we have called here
 function connectToNewUser(userId, stream) {
@@ -62,4 +84,3 @@ function addVideoStream(video, stream) {
   })
   videoGrid.append(video)
 }
-

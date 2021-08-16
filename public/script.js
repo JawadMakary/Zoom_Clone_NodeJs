@@ -7,7 +7,7 @@ const videoGrid = document.getElementById('video-grid')
 let myVideoStream;
 const myVideo = document.createElement('video')
 // turn it to false when the project is succesfully builded 
-myVideo.muted = true;
+myVideo.muted = false;
 
 // define myPeer
 //GET http://localhost:3001/peerjs/id?ts=16064630731310.9478529963693267 net::ERR_EMPTY_RESPONSE issue is fixed by:
@@ -89,4 +89,32 @@ function addVideoStream(video, stream) {
 const scrollToBottom=()=>{
   var chat_window=$(".main-chat-windows")
   chat_window.scrollTop(chat_window.prop("scrollHeight"))
+}
+// to mute our video
+const muteUnmute = () => {
+  const enabled = myVideoStream.getAudioTracks()[0].enabled;
+  if (enabled) {
+    myVideoStream.getAudioTracks()[0].enabled = false;
+    setUnmuteButton();
+  } else {
+    setMuteButton();
+    myVideoStream.getAudioTracks()[0].enabled = true;
+  }
+}
+
+
+const setMuteButton = () => {
+  const html = `
+    <i class="fas fa-microphone"></i>
+    <span>Mute</span>
+  `
+  document.querySelector('.main-mute-button').innerHTML = html;
+}
+
+const setUnmuteButton = () => {
+  const html = `
+    <i class="unmute fas fa-microphone-slash"></i>
+    <span>Unmute</span>
+  `
+  document.querySelector('.main-mute-button').innerHTML = html;
 }

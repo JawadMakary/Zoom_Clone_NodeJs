@@ -96,3 +96,8 @@ i {
   outline: none;
   color: #f5f5f5;
 }
+
+.unmute,
+.stop {
+  color: #cc3b33;
+}

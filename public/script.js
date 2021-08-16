@@ -54,6 +54,7 @@ navigator.mediaDevices.getUserMedia({
     $('ul').append(`<li class='message'>
     <b>user</b><br> ${message}
     </li>`)
+    scrollToBottom()
   })
   })
   // automatically generate id
@@ -83,4 +84,9 @@ function addVideoStream(video, stream) {
     video.play()
   })
   videoGrid.append(video)
+}
+// if there is so many msgs:create scrollbar so design won't break(+add overflow scroll)
+const scrollToBottom=()=>{
+  var chat_window=$(".main-chat-windows")
+  chat_window.scrollTop(chat_window.prop("scrollHeight"))
 }
